@@ -4,6 +4,11 @@ import "fmt"
 
 // Add a Describer interface
 
+//Describer prints out a entity description
+type Describer interface {
+	describe() string
+}
+
 // User is a single user type
 type User struct {
 	ID                         int
@@ -30,6 +35,11 @@ func (g *Group) describe() string {
 	return desc
 }
 
+// DoTheDescribing can be implemented on any type that has a describe method
+func DoTheDescribing(d Describer) string {
+	return d.describe()
+}
+
 // Create a function that doesn't care what type you pass in as long as the type "satisfies the interface"
 
 func main() {
@@ -40,4 +50,6 @@ func main() {
 	describeGroup := g.describe()
 	fmt.Println(describeUser)
 	fmt.Println(describeGroup)
+	fmt.Println(DoTheDescribing(&u1))
+	fmt.Println(DoTheDescribing(&g))
 }

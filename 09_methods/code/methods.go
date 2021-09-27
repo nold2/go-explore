@@ -8,6 +8,10 @@ type User struct {
 	FirstName, LastName, Email string
 }
 
+func (u *User) describe() string {
+	return fmt.Sprintf("Name: %s %s, Email: %s", u.FirstName, u.LastName, u.Email)
+}
+
 func describeUser(u User) string {
 	desc := fmt.Sprintf("Name: %s %s, Email: %s", u.FirstName, u.LastName, u.Email)
 	return desc
@@ -18,4 +22,6 @@ func main() {
 
 	desc := describeUser(user)
 	fmt.Println(desc)
+
+	fmt.Println(user.describe())
 }

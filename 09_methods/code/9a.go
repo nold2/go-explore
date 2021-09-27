@@ -22,8 +22,20 @@ type Group struct {
 	spaceAvailable bool
 }
 
+func (u *User) describe() string {
+	desc := fmt.Sprintf("Name: %s %s, Email: %s", u.FirstName, u.LastName, u.Email)
+	return desc
+}
+
 func describe(u User) string {
 	desc := fmt.Sprintf("Name: %s %s, Email: %s", u.FirstName, u.LastName, u.Email)
+	return desc
+}
+
+func (g *Group) describe() string {
+	g.spaceAvailable = !(len(g.Users) > 2)
+	desc := fmt.Sprintf("This user group has %d users. The newest user is %s %s. Accepting New Users: %t", len(g.Users), g.lastUser.FirstName, g.lastUser.LastName, g.spaceAvailable)
+
 	return desc
 }
 
@@ -50,4 +62,6 @@ func main() {
 
 	fmt.Println(describe(u))
 	fmt.Println(describeGroup(g))
+
+	fmt.Println(u.describe(), g.describe())
 }

@@ -3,6 +3,7 @@ package main
 import (
 	"errors"
 	"fmt"
+	"os"
 )
 
 func isGreaterThanTen(num int) error {
@@ -12,29 +13,26 @@ func isGreaterThanTen(num int) error {
 	return nil
 }
 
-// func openFile() error {
-// 	f, err := os.Open("missingFile.txt")
-// 	if err != nil {
-// 		return err
-// 	}
-// 	defer f.Close()
-// 	return nil
-// }
+func openFile() error {
+	f, err := os.Open("missingFile.txt")
+	if err != nil {
+		return err
+	}
+	defer f.Close()
+	return nil
+}
 
 func main() {
 	num := 9
-	err := isGreaterThanTen(num)
-	if err != nil {
+	if err := isGreaterThanTen(num); err != nil {
 		fmt.Println(fmt.Errorf("%d is NOT GREATER THAN TEN", num))
 		// panic(err)
 		// log.Fatalln(err)
 	}
 
-	// err := openFile()
-
-	// if err != nil {
-	// 	fmt.Println(fmt.Errorf("%v", err))
-	// }
+	if err := openFile(); err != nil {
+		fmt.Println(fmt.Errorf("%v", err))
+	}
 }
 
 // TAKE A MINUTE TO REFACTOR THE ABOVE CODE TO SCOPE THE ERROR VARIABLE INTO THE IF BLOCK
